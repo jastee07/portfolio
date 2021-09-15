@@ -1,0 +1,9 @@
+[submodule "portfolio-backend"]
+	path = portfolio-backend
+	url = https://github.com/jastee07/portfolio-backend
+[submodule "backend"]
+	path = backend
+	url = https://github.com/jastee07/portfolio-backend
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/jastee07/portfolio-frontend.git
