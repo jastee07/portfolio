@@ -52,7 +52,7 @@ export default {
         },
         async publishPost(post){
             post.published_at = moment(Date.now())
-            post.publish = true
+            post.published = true
             this.updatePost(post)
         },
         createPost(){
