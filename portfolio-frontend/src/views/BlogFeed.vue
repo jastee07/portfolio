@@ -33,7 +33,8 @@ export default {
     },
     data: function() {
             return {
-                posts: []
+                posts: [],
+                seach: ''
             };
     },
     async mounted(){
