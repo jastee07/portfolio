@@ -59,7 +59,7 @@ export default {
         }
     },
     methods:{
-        searchPosts(){
+        searchPosts(search){
             this.search = search
         }
     }
