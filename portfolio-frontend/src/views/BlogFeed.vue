@@ -51,7 +51,7 @@ export default {
         published_posts(){
             var posts = this.posts.filter(post => post.published)
             if(this.search != ''){
-                posts = posts.filter(post => post.title.toLowerCase().includes(this.search.toLowerCase()))
+                return posts.filter(post => post.title.toLowerCase().includes(this.search.toLowerCase()))
             }
             else{
                 return posts
