@@ -8,7 +8,10 @@ const routes = [
   {
     path:'/',
     name:'BlogFeed',
-    component: () => import('../views/BlogFeed.vue')
+    component: () => import('../views/BlogFeed.vue'),
+    meta:{
+      title:'Blog'
+    }
   },
   {
     path: '/login',
@@ -16,26 +19,45 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    meta:{
+      title:'Login'
+    }
   },
   {
     path:'/author',
     name:'Author',
     component: () => import('../views/Author.vue'),
-    beforeEnter: guardMyroute
+    beforeEnter: guardMyroute,
+    meta:{
+      title:'Author'
+    }
   },
   {
     path: '/:slug',
     name: 'BlogPost',
-    component: () => import('../views/BlogPost.vue')
+    component: () => import('../views/BlogPost.vue'),
+    meta:{
+      title:'Blog Post'
+    }
   }
 
 ]
+
+const DEFAULT_TITLE = 'jakesteele.net';
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+
+router.afterEach((to, from) => {
+  // Use next tick to handle router history correctly
+  // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
+  Vue.nextTick(() => {
+      document.title = to.meta.title || DEFAULT_TITLE;
+  });
+});
 
 export default router

@@ -1,4 +1,7 @@
 <template>
+
+<div>
+ <nav-bar @search="search"/>
     <div>
         <p v-if="!posts">We're sorry. We'll post something soon</p>
         <b-list-group>
@@ -13,6 +16,8 @@
             </b-list-group-item>
         </b-list-group>
     </div>
+</div>
+   
 </template>
 
 
@@ -20,8 +25,12 @@
 //import axios from 'axios'
 import moment from 'moment'
 import BlogService from '../services/blog-service'
+import NavBar from '../components/NavBar.vue'
 export default {
     name: "BlogFeed",
+    components: {
+        NavBar
+    },
     data: function() {
             return {
                 posts: []
@@ -35,6 +44,22 @@ export default {
     filters: {
         formatDate(date){
             return moment(date).format('LL')
+        }
+    },
+    computed: {
+        published_posts(){
+            var posts = this.posts.filter(post => post.published)
+            if(this.search != ''){
+                posts = posts.filter(post => post.title.toLowerCase().includes(this.search.toLowerCase()))
+            }
+            else{
+                return posts
+            }
+        }
+    },
+    methods:{
+        searchPosts(){
+            this.search = search
         }
     }
 }

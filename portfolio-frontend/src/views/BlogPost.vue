@@ -1,5 +1,7 @@
 <template>
-  <div class="container mt-5">
+<div>
+    <nav-bar/>
+<div class="container mt-5">
       <div class="row">
           <div class="col-lg-8">
               <article>
@@ -21,13 +23,19 @@
           </div>
       </div>
   </div>
+</div>
+  
 </template>
 
 <script>
 import moment from 'moment'
 import BlogService from '../services/blog-service'
+import NavBar from '../components/NavBar.vue'
 export default {
     name: 'BlogPost',
+    components: {
+        NavBar
+    },
     data(){
         return {
             post: {}

@@ -23,5 +23,12 @@ export default {
             return this.$store.getters.isAuthenticated
         },
     },
+    watch:{
+        searchBar(newVal, oldVal){
+            if(newVal !== oldVal){
+                this.$emit("search", newVal)
+            }
+        }
+    }
 }
 </script>
