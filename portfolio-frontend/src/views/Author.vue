@@ -23,8 +23,9 @@
         <b-col cols="4"/>
         <b-col cols="7">
           <post-manager :post="selectedPost" 
-                @createPost="createPost()"
-                @deletePost="deletePost()"/>
+                @createPost="createPost"
+                @deletePost="deletePost"
+                @savePost="savePost"/>
         </b-col>
       </b-row>
       <b-row>
@@ -65,7 +66,10 @@ export default {
       this.selectedPost.body = data;
     },
     savePost(data){
+      console.log(data);
       this.selectedPost = data;
+      var postIndex = this.posts.findIndex(post => post.title === data.title);
+      this.posts[postIndex] = data;
     },
     createPost(){
       var post = {
