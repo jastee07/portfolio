@@ -18,6 +18,18 @@
 <script>
 export default {
     name: 'NavBar',
+    data() {
+        return {
+            searchBar: this.search
+        }
+    },
+    props: {
+        search: {
+            type: String,
+            required: false,
+            default: ''
+        }
+    },
     computed: { 
         isAuthenticated() {
             return this.$store.getters.isAuthenticated

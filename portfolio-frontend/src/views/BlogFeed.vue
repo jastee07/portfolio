@@ -1,11 +1,11 @@
 <template>
 
 <div>
- <nav-bar @search="search"/>
+ <nav-bar @search="searchPosts" :search="search"/>
     <div>
         <p v-if="!posts">We're sorry. We'll post something soon</p>
         <b-list-group>
-            <b-list-group-item v-for="post in posts" v-bind:key="post.id">
+            <b-list-group-item v-for="post in published_posts" v-bind:key="post.id">
 
                 <b-link :to="'/' + post.slug + '/'" variant="dark" type="dark">
                 <h2>{{post.title}}</h2>
@@ -34,7 +34,7 @@ export default {
     data: function() {
             return {
                 posts: [],
-                seach: ''
+                search: ''
             };
     },
     async mounted(){
