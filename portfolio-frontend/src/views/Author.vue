@@ -70,6 +70,7 @@ export default {
       this.selectedPost = data;
       var postIndex = this.posts.findIndex(post => post.title === data.title);
       this.posts[postIndex] = data;
+      this.makeToast("Saved post successfully!")
     },
     createPost(){
       var post = {
@@ -84,6 +85,14 @@ export default {
       await BlogService.removePost(this.selectedPost.slug);
       this.posts = this.posts.filter(post => post.slug !== this.selectedPost.slug);
       this.selectedPost = {}
+    },
+    makeToast(message){
+      this.$bvToast.toast(message, {
+        title: 'Success',
+        autoHideDelay: 5000,
+        appendToast: true,
+        variant: 'success'
+      });
     }
   }
 };
