@@ -57,6 +57,7 @@ export default {
         },
         createPost(){
             this.$emit('createPost')
+            
         },
         deletePost(){
             this.$emit('deletePost')

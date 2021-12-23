@@ -12,7 +12,7 @@ class AuthService {
     }
 
     fetchUser(){
-        return axios.get('auth/user')
+        return axios.get('auth/user/')
     }
 }
 
