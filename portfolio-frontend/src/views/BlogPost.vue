@@ -3,7 +3,7 @@
     <nav-bar/>
 <div class="container mt-5">
       <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-12">
               <article>
                         <!-- Post header-->
                         <header class="mb-4">

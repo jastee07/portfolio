@@ -24,10 +24,10 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
-class Tag(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True, null=False)
-    posts = models.ManyToManyField(Post, related_name='tags')
+    posts = models.ManyToManyField(Post, related_name='categories')
 
     def __str__(self):
         return self.name
@@ -36,11 +36,11 @@ class Tag(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
 
-
-class Category(models.Model):
+class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True, null=False)
-    posts = models.ManyToManyField(Post, related_name='categories')
+    posts = models.ManyToManyField(Post, related_name='tags')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return self.name

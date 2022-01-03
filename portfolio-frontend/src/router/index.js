@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/',
+    path:'/blog',
     name:'BlogFeed',
     component: () => import('../views/BlogFeed.vue'),
     meta:{
@@ -39,6 +39,14 @@ const routes = [
     component: () => import('../views/BlogPost.vue'),
     meta:{
       title:'Blog Post'
+    }
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/Home.vue'),
+    meta:{
+      title:'Home'
     }
   }
 
