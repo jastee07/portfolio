@@ -1,3 +1,5 @@
+import BlogService from '../services/blog-service'
+
 const author = {
     state: {
         post: {}
@@ -11,7 +13,7 @@ const author = {
         }
       },
       actions:{
-        updatePost: async({ dispatch, commit }, payload) => {
+        updatePost: async({ commit }, payload) => {
             try{
                 var response = await BlogService.updatePost(payload)
 
@@ -22,6 +24,12 @@ const author = {
             catch(e){
                 return e.response.data ;
             }
+        },
+        updateContent: async({ commit }, payload) => {
+            commit('setPostContent', payload);
+        },
+        selectPost: async({ commit }, payload) => {
+            commit('setPost', payload);
         }
       },
       getters: {

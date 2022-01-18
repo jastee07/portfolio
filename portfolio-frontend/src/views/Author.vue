@@ -59,11 +59,13 @@ export default {
     this.posts = await BlogService.getPosts(true).then(response => response.data)
   },
   methods: {
-    selectPost(index){
+    async selectPost(index){
       this.selectedPost = this.posts[index];
+      await this.$store.dispatch('selectPost', this.selectedPost)
+
     },
     updateContent(data){
-      this.selectedPost.body = data;
+      this.$store.dispatch('updateContent', data)
     },
     savePost(data){
       console.log(data);
