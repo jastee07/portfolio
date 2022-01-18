@@ -41,7 +41,7 @@
               and what doesn't. We always learn something new and grow a little bit in the process.
             </p>
             <a class="text-decoration-none" href="#!">
-              Call to action
+              Start Here
               <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -58,7 +58,7 @@
               take on new ideas, step up to new challenges, consistently reflect on our performance.
             </p>
             <a class="text-decoration-none" href="#!">
-              Call to action
+              Start Here
               <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -75,7 +75,7 @@
               If you know how it works, you can make it work for you in any economy at any time.
             </p>
             <a class="text-decoration-none" href="#!">
-              Call to action
+              Start Here
               <i class="bi bi-arrow-right"></i>
             </a>
           </div>
