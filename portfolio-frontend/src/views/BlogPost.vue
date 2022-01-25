@@ -16,8 +16,8 @@
 import moment from 'moment'
 import BlogService from '../services/blog-service'
 import NavBar from '../components/NavBar.vue'
-import ViewPost from '../components/ViewPost.vue'
-import EditPost from '../components/EditPost.vue'
+import ViewPost from '../components/blog/ViewPost.vue'
+import EditPost from '../components/blog/EditPost.vue'
 
 export default {
     name: 'BlogPost',

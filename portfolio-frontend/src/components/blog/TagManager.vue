@@ -13,7 +13,7 @@
 
 
 <script>
-import BlogService from '../services/blog-service'
+import BlogService from '../../services/blog-service'
 export default {
     name: 'CategoryManager',
     mounted(){
