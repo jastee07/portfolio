@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'blog',
     'user_profile',
-    'dj_rest_auth'
+    'dj_rest_auth',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Django Rest Framework Setup 
+
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'jstee-auth'
 JWT_AUTH_REFRESH_COOKIE = 'jstee-refresh'
@@ -163,3 +166,21 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True   
 ACCOUNT_USERNAME_REQUIRED = False
+
+# Digital Ocean Spaces Set Up
+if DEVELOPMENT_MODE != "True":
+    AWS_ACCESS_KEY_ID = os.getenv('SPACE_ACCESS_KEY', "False")
+    AWS_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY", "False")
+    AWS_STORAGE_BUCKET_NAME = 'jakesteelemedia'
+    AWS_S3_ENDPOINT_URL = 'https://nyc3.digitaloceanspaces.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static-files'
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
