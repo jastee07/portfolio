@@ -37,8 +37,20 @@ export default {
     },
     methods:{
         async loadPost(){
-            let { data } = await BlogService.getPost(this.$route.params.slug)
-            this.post = data;
+            if(this.$route.params.slug==='new-post'){
+                this.post = {
+                    title: 'New Post',
+                    body: '',
+                    published: false,
+                    slug:null,
+                    tags:[],
+                    categories:[],
+                }
+            }
+            else{
+                this.post = await BlogService.getPost(this.$route.params.slug)
+                    .then(response => response.data)
+            }
         },
         toggleEditingMode(){
             this.isEditing = !this.isEditing
@@ -56,7 +68,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

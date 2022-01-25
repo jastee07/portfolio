@@ -17,6 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'slug'
         ]
+        read_only_fields = ['slug']
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,6 +25,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'slug'
         ]
+        read_only_fields = ['slug']
 
 
 class PostSerializer(serializers.ModelSerializer):

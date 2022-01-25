@@ -54,12 +54,12 @@ const editor = {
             commit("ADD_CATEGORY_TO_POST", category);
 
         },
-        removeCategory: function({ commit }, category) {
+        removeCategoryFromPost: function({ commit }, category) {
             commit("REMOVE_CATEGORY_FROM_POST", category);
         },
         createCategory: async function({ commit }, category) {
             var response = await BlogService.createCategory(category);
-            if(response.status === 200){
+            if(response.status === 201){
                 commit("ADD_CATEGORY_TO_POST", response.data);
             }
             else{

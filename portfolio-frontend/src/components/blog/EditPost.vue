@@ -7,7 +7,7 @@
             </div>
             <div class="col-4">
                 <b-button-group>
-                    <b-button @click="updatePost(modifiedPost)">Save</b-button>
+                    <b-button @click="saveOrUpdatePost(modifiedPost)">Save</b-button>
                     <b-button @click="publish" v-if="!modifiedPost.published">Publish</b-button>
                     <b-button @click="preview">Preview</b-button>
                 </b-button-group>
@@ -55,7 +55,7 @@ export default {
     created(){
         this.modifiedPost = this.post;
         this.debouncedHandler = debounce(() => {
-                this.updatePost(this.modifiedPost)
+                this.saveOrUpdatePost(this.modifiedPost)
             }, 2000);
     },
     beforeUnmount(){
@@ -64,7 +64,9 @@ export default {
     methods:{
         ...mapActions([
             'setPost',
-            'updatePost',
+            'createPost',
+            'updatePost'
+
         ]),
         publish(){
             if(this.modifiedPost.published){
@@ -75,6 +77,14 @@ export default {
             else{
                 this.modifiedPost.published = true;
                 this.modifiedPost.published_at = moment(Date.now())
+                this.updatePost(this.modifiedPost)
+            }
+        },
+        saveOrUpdatePost(){
+            if(this.modifiedPost.slug === null){
+                this.createPost(this.modifiedPost)
+            }
+            else{
                 this.updatePost(this.modifiedPost)
             }
         },

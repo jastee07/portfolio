@@ -7,12 +7,13 @@
         <div v-if="isAuthenticated">
             <b-button-group size="sm">
                 <b-button :pressed.sync="showDrafts" variant="secondary">{{ drafts_button }}</b-button>
+                <router-link to="/blog/new-post"><b-button variant="secondary">New Post</b-button></router-link>
             </b-button-group>
         </div>
         <b-list-group>
             <b-list-group-item v-for="post in selected_posts" v-bind:key="post.id">
 
-                <b-link :to="'/' + post.slug + '/'" variant="dark" type="dark">
+                <b-link :to="'/blog/' + post.slug + '/'" variant="dark" type="dark">
                 <h2>{{post.title}}</h2>
 
                 </b-link>

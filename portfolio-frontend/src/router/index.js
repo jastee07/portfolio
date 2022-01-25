@@ -25,7 +25,7 @@ const routes = [
     }
   },
   {
-    path: '/:slug',
+    path: '/blog/:slug',
     name: 'BlogPost',
     component: () => import('../views/BlogPost.vue'),
     meta:{
