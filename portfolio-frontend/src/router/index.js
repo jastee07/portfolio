@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import guardMyroute from './guards'
+// import guardMyroute from './guards'
 
 Vue.use(VueRouter)
 
@@ -22,15 +22,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta:{
       title:'Login'
-    }
-  },
-  {
-    path:'/author',
-    name:'Author',
-    component: () => import('../views/Author.vue'),
-    beforeEnter: guardMyroute,
-    meta:{
-      title:'Author'
     }
   },
   {

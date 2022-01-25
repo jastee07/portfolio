@@ -1,28 +1,13 @@
 <template>
 <div>
     <nav-bar/>
-<div class="container mt-5">
-      <div class="row">
-          <div class="col-lg-12">
-              <article>
-                        <!-- Post header-->
-                        <header class="mb-4">
-                            <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-                            <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">{{post.published_at | formatDate}}</div>
-                            <!-- Post categories-->
-                            <p class="badge bg-secondary text-decoration-none link-light" v-for="category in post.categories" :key="category.id">{{category.name}}</p>
-                        </header>
-                        <!-- Preview image figure-->
-                        <!-- Post content-->
-                        <section class="mb-5" v-html="post.body">
-
-                        </section>
-                    </article>
-          </div>
-      </div>
-  </div>
+    <b-button-group size="sm" v-if="isAuthenticated && !isEditing">
+        <b-button :pressed.sync="isEditing" variant="secondary">
+            Edit
+        </b-button>
+    </b-button-group>
+    <edit-post v-if="isEditing" :post="post" v-on:preview="toggleEditingMode"/>
+    <view-post v-else :post="post"/>
 </div>
   
 </template>
@@ -31,14 +16,20 @@
 import moment from 'moment'
 import BlogService from '../services/blog-service'
 import NavBar from '../components/NavBar.vue'
+import ViewPost from '../components/ViewPost.vue'
+import EditPost from '../components/EditPost.vue'
+
 export default {
     name: 'BlogPost',
     components: {
-        NavBar
+        NavBar,
+        ViewPost,
+        EditPost
     },
     data(){
         return {
-            post: {}
+            post: {},
+            isEditing: false
         }
     },
     mounted() {
@@ -48,12 +39,20 @@ export default {
         async loadPost(){
             let { data } = await BlogService.getPost(this.$route.params.slug)
             this.post = data;
+        },
+        toggleEditingMode(){
+            this.isEditing = !this.isEditing
         }
     },
     filters: {
         formatDate(date){
             return moment(date).format('LL')
         }
+    },
+    computed:{
+        isAuthenticated() {
+            return this.$store.getters.isAuthenticated
+        },
     }
 }
 </script>

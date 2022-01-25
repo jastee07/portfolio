@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import auth from './auth'
-import author from './author'
+import editor from './editor'
 
 Vue.use(Vuex)
 
@@ -13,7 +13,7 @@ export default new Vuex.Store({
   actions:{},
   modules: {
     auth:auth,
-    author:author
+    editor: editor
   },
   plugins:[
     createPersistedState({
