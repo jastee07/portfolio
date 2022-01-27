@@ -46,8 +46,8 @@ const editor = {
                 commit('SET_ERRORS', response.data);
             }
         },
-        updatePost: async ({commit}, post) => {
-            var response = await BlogService.updatePost(post);
+        updatePost: async ({commit, state}) => {
+            var response = await BlogService.updatePost(state.post);
             if(response.status === 200){
                 commit("SET_POST", response.data);
             }

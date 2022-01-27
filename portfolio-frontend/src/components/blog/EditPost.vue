@@ -68,24 +68,28 @@ export default {
             'updatePost'
 
         ]),
-        publish(){
+        async publish(){
             if(this.modifiedPost.published){
-                this.updatePost(this.modifiedPost)
+                await this.setPost(this.modifiedPost)
+                this.updatePost()
             }else if(!this.modifiedPost.slug){
+                await this.setPost(this.modifiedPost)
                 this.createPost(this.modifiedPost)
             }
             else{
                 this.modifiedPost.published = true;
                 this.modifiedPost.published_at = moment(Date.now())
-                this.updatePost(this.modifiedPost)
+                await this.setPost(this.modifiedPost)
+                this.updatePost()
             }
         },
-        saveOrUpdatePost(){
+        async saveOrUpdatePost(){
             if(this.modifiedPost.slug === null){
                 this.createPost(this.modifiedPost)
             }
             else{
-                this.updatePost(this.modifiedPost)
+                await this.setPost(this.modifiedPost)
+                this.updatePost()
             }
         },
         preview(){
