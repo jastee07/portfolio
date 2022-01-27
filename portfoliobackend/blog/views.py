@@ -1,16 +1,16 @@
 from django.template.defaultfilters import slugify
 from rest_framework import viewsets
-from blog.models import Post, Tag, Category
-from blog.serializers import PostSerializer, TagSerializer, CategorySerializer
-from user_profile.permissions import IsOwnerOrReadOnly
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from blog.models import Post, Category, Tag
+from blog.serializers import PostSerializer, CategorySerializer, TagSerializer
+from user_profile.permissions import IsOwnerOrReadOnly, ReadOnly
+from rest_framework.permissions import IsAdminUser
 # Create your views here.
 
 
 class PostViewset(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUser | ReadOnly]
     lookup_field = 'slug'
 
 
@@ -30,12 +30,10 @@ class PostViewset(viewsets.ModelViewSet):
 class CategoryViewset(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_class = [IsAuthenticatedOrReadOnly]
-
-
+    permission_class = [IsAdminUser|ReadOnly]
 
 class TagViewset(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_class = [IsAuthenticatedOrReadOnly]
+    permission_class = [IsAdminUser|ReadOnly]
 

@@ -2,7 +2,12 @@ import BlogService from '../services/blog-service';
 
 const editor = {
     state: {
-        post : {},
+        post : {
+            title: '',
+            content: '',
+            tags: [],
+            categories: []
+        },
         errors : {}
       },
       mutations: {
@@ -84,7 +89,9 @@ const editor = {
       },
       getters: {
         post: state => state.post,
-        errors: state => state.errors
+        errors: state => state.errors,
+        categories: state => state.post.categories,
+        tags: state => state.post.tags
       },
 }
 

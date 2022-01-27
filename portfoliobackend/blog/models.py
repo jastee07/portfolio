@@ -26,8 +26,8 @@ class Post(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True, null=False)
-    posts = models.ManyToManyField(Post, related_name='categories')
+    slug = models.SlugField(max_length=100, unique=True, null=False, blank=False)
+    posts = models.ManyToManyField(Post, related_name='categories', blank=True)
 
     def __str__(self):
         return self.name
@@ -35,6 +35,7 @@ class Category(models.Model):
     def save(self, *args, **kwargs): # new
         if not self.slug:
             self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -47,6 +48,7 @@ class Tag(models.Model):
     def save(self, *args, **kwargs): # new
         if not self.slug:
             self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 
 class Comment(models.Model):

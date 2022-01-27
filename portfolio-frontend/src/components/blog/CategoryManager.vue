@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="container">
-            <b-form-input v-model="categorySearch" placeholder="Categories"></b-form-input>
+            <b-form-input v-model="categorySearch" placeholder="Categories" list="category-data-list"></b-form-input>
             <b-button @click="addOrCreate(categorySearch)"><b-icon icon="plus-circle"/></b-button>
             <datalist id="category-data-list">
-                <option v-for="category in allCategories" :value="category.name" :key="category.name"/>
+                <option v-for="category in unselectedCategories" :value="category.name" :key="category.name"/>
             </datalist> 
         </div>
             
@@ -44,21 +44,25 @@ export default {
             let { data } = await BlogService.getCategories()
             this.allCategories = data;
         },
-        addOrCreate(category){
+        async addOrCreate(category){
             var categoryToAdd = this.allCategories.find(c => c.name === category);
             if(categoryToAdd){
                 this.addCategoryToPost(categoryToAdd);
             }else{
 
-                this.createCategory({
+                await this.createCategory({
                     name: category
                 });
+                this.loadCategories();
             }
         }
     },
     computed:{
         selectedCategories(){
-            return this.$store.getters.post.categories
+            return this.$store.getters.categories
+        },
+        unselectedCategories(){
+            return this.allCategories.filter(c => !this.selectedCategories.includes(c));
         }
     }
 }

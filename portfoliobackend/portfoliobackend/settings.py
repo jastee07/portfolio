@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'blog',
     'user_profile',
     'dj_rest_auth',
-    'storages'
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -168,7 +168,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 # Digital Ocean Spaces Set Up
-if DEVELOPMENT_MODE != "True":
+if DEVELOPMENT_MODE is False:
     AWS_ACCESS_KEY_ID = os.getenv('SPACE_ACCESS_KEY', "False")
     AWS_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY", "False")
     AWS_STORAGE_BUCKET_NAME = 'jakesteelemedia'

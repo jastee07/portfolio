@@ -28,7 +28,10 @@ import moment from 'moment'
 export default {
     name: 'ViewPost',
     props: {
-        post: {}
+        post: {
+            tags:[],
+            categorties: []
+        }
     },
     filters: {
         formatDate(date){
