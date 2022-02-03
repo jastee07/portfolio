@@ -27,15 +27,14 @@
 import moment from 'moment'
 export default {
     name: 'ViewPost',
-    props: {
-        post: {
-            tags:[],
-            categorties: []
-        }
-    },
     filters: {
         formatDate(date){
             return moment(date).format('LL')
+        }
+    },
+    computed:{
+        post(){
+            return this.$store.getters.post;
         }
     }
 }

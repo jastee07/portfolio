@@ -37,12 +37,28 @@ class BlogService {
         return axios.get(`blog/tags/`)
     }
 
+    addTagToPost(data){
+        return axios.post(`blog/add-tag-to-post/`, data)
+    }
+
+    removeTagFromPost(data){
+        return axios.post(`blog/remove-tag-from-post/`, data)
+    }
+
     createCategory(category){
         return axios.post(`blog/categories/`, category)
     }
 
     getCategories(){
         return axios.get(`blog/categories/`)
+    }
+
+    addCategoryToPost(data){
+        return axios.post(`blog/add-category-to-post/`, data)
+    }   
+
+    removeCategoryFromPost(data){
+        return axios.post(`blog/remove-category-from-post/`, data)
     }
 }
 

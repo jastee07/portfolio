@@ -19,10 +19,7 @@
                     <br>
                     <category-manager/>
                     <br>
-                    <label>Tags</label>
-                    <b-list-group>
-                        <b-form-tags v-model="modifiedPost.tags" separator=" ,;"></b-form-tags>
-                    </b-list-group>
+                    <tag-manager/>
                 </div>
             </div>
         </div>
@@ -37,15 +34,14 @@ import debounce from 'lodash.debounce'
 import moment from 'moment'
 import { mapActions } from 'vuex'
 import CategoryManager from './CategoryManager.vue'
+import TagManager from './TagManager.vue'
 
 export default {
     name: 'EditPost',
     components: {
         VueEditor,
-        CategoryManager
-    },
-    props: {
-        post: {}
+        CategoryManager,
+        TagManager
     },
     data() {
         return {
@@ -99,6 +95,11 @@ export default {
     filters: {
         formatDate(date){
             return moment(date).format('LL')
+        }
+    },
+    computed:{
+        post(){
+            return this.$store.getters.post;
         }
     }
 

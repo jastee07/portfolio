@@ -45,15 +45,22 @@ export default {
             this.allCategories = data;
         },
         async addOrCreate(category){
+            this.categorySearch = "";
             var categoryToAdd = this.allCategories.find(c => c.name === category);
+            if(this.selectedCategories.find(c => c.name === category)){
+                return;
+            }
             if(categoryToAdd){
-                this.addCategoryToPost(categoryToAdd);
+                await this.addCategoryToPost(categoryToAdd);
+                
             }else{
 
-                await this.createCategory({
-                    name: category
+                category = await this.createCategory({
+                        name: category
                 });
+                await this.addCategoryToPost(category);
                 this.loadCategories();
+                
             }
         }
     },

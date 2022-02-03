@@ -18,6 +18,7 @@ import BlogService from '../services/blog-service'
 import NavBar from '../components/NavBar.vue'
 import ViewPost from '../components/blog/ViewPost.vue'
 import EditPost from '../components/blog/EditPost.vue'
+import {mapActions} from 'vuex'
 
 export default {
     name: 'BlogPost',
@@ -28,28 +29,28 @@ export default {
     },
     data(){
         return {
-            post: {},
             isEditing: false
         }
     },
-    mounted() {
-        this.loadPost();
+    async mounted() {
+        await this.loadPost();
     },
     methods:{
+        ...mapActions(['setPost']),
         async loadPost(){
             if(this.$route.params.slug==='new-post'){
-                this.post = {
+                await this.setPost({
                     title: 'New Post',
                     body: '',
                     published: false,
                     slug:null,
                     tags:[],
                     categories:[],
-                }
+                });
             }
             else{
-                this.post = await BlogService.getPost(this.$route.params.slug)
-                    .then(response => response.data)
+                var response = await BlogService.getPost(this.$route.params.slug)
+                this.setPost(response.data);
             }
         },
         toggleEditingMode(){
@@ -65,6 +66,9 @@ export default {
         isAuthenticated() {
             return this.$store.getters.isAuthenticated
         },
+        post(){
+            return this.$store.getters.post;
+        }
     }
 }
 </script>

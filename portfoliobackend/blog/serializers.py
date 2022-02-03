@@ -31,9 +31,8 @@ class TagSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     owner = AuthorSerializer(read_only=True)
     slug = serializers.SerializerMethodField(method_name='get_slug')
-    tags = TagSerializer(read_only=True,many=True)
+    tags = TagSerializer(read_only=True, many=True)
     categories = CategorySerializer(read_only=True, many=True)
-
     class Meta:
         model = Post
         fields = [
