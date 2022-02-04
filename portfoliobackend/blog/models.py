@@ -20,8 +20,7 @@ class Post(models.Model):
         return self.title
 
     def save(self, *args, **kwargs): # new
-        if not self.slug:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
 class Category(models.Model):

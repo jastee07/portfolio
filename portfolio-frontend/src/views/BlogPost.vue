@@ -50,7 +50,7 @@ export default {
             }
             else{
                 var response = await BlogService.getPost(this.$route.params.slug)
-                this.setPost(response.data);
+                await this.setPost(response.data);
             }
         },
         toggleEditingMode(){
